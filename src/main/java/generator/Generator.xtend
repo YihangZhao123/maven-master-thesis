@@ -25,7 +25,7 @@ class Generator {
 	public static int TESTING=1
 	public static int PC=1
 	public static int NUCLEO=0
-
+	public static int fifoType=2
 	Set<ModuleInterface> modules = new HashSet
 
 	new(ForSyDeSystemGraph model, String root) {

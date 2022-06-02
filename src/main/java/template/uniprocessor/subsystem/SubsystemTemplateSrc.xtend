@@ -65,8 +65,15 @@ class SubsystemTemplateSrc implements SubsystemTemplate {
 				/* initialize the channels*/
 					«FOR channel : Generator.sdfchannelSet»
 						«var sdfname=channel.getIdentifier()»
-			«««					init_channel_«Query.findSDFChannelDataType(Generator.model,channel)»(&fifo_«sdfname»,buffer_«sdfname»,buffer_«sdfname»_size);
-					ref_init(&fifo_«sdfname»,buffer_«sdfname»,buffer_«sdfname»_size);
+						«IF Generator.fifoType==1»	
+						init_channel_«Query.findSDFChannelDataType(Generator.model,channel)»(&fifo_«sdfname»,buffer_«sdfname»,buffer_«sdfname»_size);
+						«ENDIF»
+						«IF Generator.fifoType==2»
+						init(&fifo_«sdfname»,buffer_«sdfname»,buffer_«sdfname»_size);
+						«ENDIF»
+«««						«IF Generator.fifoType==3»
+«««						init(&fifo_«sdfname»,buffer_«sdfname»,buffer_«sdfname»_size);
+«««						«ENDIF»
 					«ENDFOR»		
 					
 					«FOR channel : Generator.sdfchannelSet»
@@ -74,9 +81,13 @@ class SubsystemTemplateSrc implements SubsystemTemplate {
 				«IF sdfchannel.getNumOfInitialTokens()!==null&&sdfchannel.getNumOfInitialTokens()>0»
 					«var b = (sdfchannel.getProperties().get("__initialTokenValues_ordering__").unwrap() as HashMap<String,Integer>) »
 					«FOR k:b.keySet()»
-						write_non_blocking(&fifo_«sdfchannel.getIdentifier()»,(void*)&«k»);
-			«««							write_non_blocking_«Query.findSDFChannelDataType(Generator.model,channel)»(&fifo_«sdfchannel.getIdentifier()»,«k»);
-						«ENDFOR»
+							«IF Generator.fifoType==2»
+							write_non_blocking(&fifo_«sdfchannel.getIdentifier()»,(void*)&«k»);
+							«ENDIF»
+							«IF Generator.fifoType==1»	
+							write_non_blocking_«Query.findSDFChannelDataType(Generator.model,channel)»(&fifo_«sdfchannel.getIdentifier()»,«k»);
+							«ENDIF»
+					«ENDFOR»
 				«ENDIF»
 					«ENDFOR»
 					return 0;
@@ -93,12 +104,21 @@ class SubsystemTemplateSrc implements SubsystemTemplate {
 				«var sdfname=channel.getIdentifier()»
 				«var type = Query.findSDFChannelDataType(Generator.model,channel)»
 				/* extern sdfchannel «sdfname»*/
-			«««				extern «type» buffer_«sdfname»[];
-«««				extern int buffer_«sdfname»_size;
-«««				extern circular_fifo_«type» fifo_«sdfname»;
+				«IF Generator.fifoType==1»	
+				extern «type» buffer_«sdfname»[];
+				extern int buffer_«sdfname»_size;
+				extern circular_fifo_«type» fifo_«sdfname»;
+				«ENDIF»
+				«IF Generator.fifoType==2»	
 				extern void* buffer_«sdfname»[];
 				extern size_t buffer_«sdfname»_size;
-				extern ref_fifo fifo_«sdfname»;
+				extern circular_fifo fifo_«sdfname»;
+				«ENDIF»
+				«IF Generator.fifoType==3»	
+				extern void* buffer_«sdfname»[];
+				extern size_t buffer_«sdfname»_size;
+				extern circular_fifo fifo_«sdfname»;
+				«ENDIF»
 			«ENDFOR»
 		'''
 	}	

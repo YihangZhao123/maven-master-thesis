@@ -5,6 +5,7 @@ import forsyde.io.java.drivers.ForSyDeModelHandler
 
 
 
+
 import generator.Generator
 import generator.InitProcessingModule
 import generator.SDFChannelProcessingModule
@@ -20,31 +21,37 @@ import template.uniprocessor.others.DataTypeSrc
 import template.uniprocessor.fifo.SpinLockTemplateInc
 import template.uniprocessor.fifo.SpinLockTemplateSrc
 import template.uniprocessor.others.Config
-import template.uniprocessor.fifo.CircularFIFOTemplateSrc1
-import template.uniprocessor.fifo.CircularFIFOTemplateInc1
+import template.uniprocessor.fifo.fifo1.*
+
+import template.uniprocessor.fifo.fifo2.FIFOInc2
+import template.uniprocessor.fifo.fifo2.FIFOSrc2
+import template.uniprocessor.fifo.fifo3.FIFOInc3
+import template.uniprocessor.fifo.fifo3.FIFOSrc3
 
 /**
  * one core
  */
 class demo1 {
 	def static void main(String[] args) {
-//		val path = "forsyde-io/modified1/complete-mapped-sobel-model.forsyde.xmi";
-//		val path2 = "forsyde-io/modified1/sobel-application.fiodl"
-//		val root = "generateCode/c/single/single"
-//
-//		var loader = (new ForSyDeModelHandler)
-//		var model = loader.loadModel(path)
-//		model.mergeInPlace(loader.loadModel(path2))
-		
-		
-		val path = "test2.fiodl"
-		val root = "generateCode/c/single2"
+		val path = "forsyde-io/modified1/complete-mapped-sobel-model.forsyde.xmi";
+		val path2 = "forsyde-io/modified1/sobel-application.fiodl"
+		val root = "generateCode/c/single/single"
+
 		var loader = (new ForSyDeModelHandler)
-		var model = loader.loadModel(path)		
+		var model = loader.loadModel(path)
+		model.mergeInPlace(loader.loadModel(path2))
+		
+		
+//		val path = "test2.fiodl"
+//		val root = "generateCode/c/single2"
+//		var loader = (new ForSyDeModelHandler)
+//		var model = loader.loadModel(path)		
 		
 		
 		var Generator gen = new Generator(model, root)
-
+		Generator.fifoType=2
+		
+		 
 		var sdfchannelModule = new SDFChannelProcessingModule
 		sdfchannelModule.add(new SDFChannelTemplateSrc)
 		gen.add(sdfchannelModule)
@@ -64,14 +71,27 @@ class demo1 {
 		initModule.add(new DataTypeInc)
 		initModule.add(new DataTypeSrc)
 
-		initModule.add(new CircularFIFOTemplateInc1)
-		initModule.add(new CircularFIFOTemplateSrc1)
+		if(Generator.fifoType==1){
+			initModule.add(new FIFOInc1)
+			initModule.add(new FIFOSrc1)
+		}
+		
+		
+		if(Generator.fifoType==2){
+			initModule.add(new FIFOInc2)
+			initModule.add(new FIFOSrc2)
+		}
+		if(Generator.fifoType==3){
+			initModule.add(new FIFOInc3)
+			initModule.add(new FIFOSrc3)
+		}
+
+		
 		initModule.add(new SpinLockTemplateInc)
 		initModule.add(new SpinLockTemplateSrc)
 		initModule.add(new Config)
 		
-		//initModule.add(new SubsystemInitInc)
-		//initModule.add(new SubsystemInitSrc)
+
 		
 		gen.add(initModule)
 
