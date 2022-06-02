@@ -11,7 +11,7 @@ import utils.Query
 
 class test5 {
 	def static void main(String[] args) {
-		val path = "a.forsyde.xmi"
+		val path = "example2.fiodl"
 		val root = "generateCode/c/single2"
 		var loader = (new ForSyDeModelHandler)
 		var model = loader.loadModel(path)		

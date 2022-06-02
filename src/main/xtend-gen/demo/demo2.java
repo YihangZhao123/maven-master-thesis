@@ -29,8 +29,8 @@ import template.baremetal_multi.SubsystemTemplateSrcMulti;
 public class demo2 {
   public static void main(final String[] args) {
     try {
-      final String path = "b.forsyde.xmi";
-      final String root = "generateCode/c/multi";
+      final String path = "test2.fiodl";
+      final String root = "generateCode/c/multi3";
       ForSyDeModelHandler loader = new ForSyDeModelHandler();
       ForSyDeSystemGraph model = loader.loadModel(path);
       Generator gen = new Generator(model, root);

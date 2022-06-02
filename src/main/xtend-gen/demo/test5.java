@@ -10,7 +10,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 public class test5 {
   public static void main(final String[] args) {
     try {
-      final String path = "a.forsyde.xmi";
+      final String path = "example2.fiodl";
       final String root = "generateCode/c/single2";
       ForSyDeModelHandler loader = new ForSyDeModelHandler();
       ForSyDeSystemGraph model = loader.loadModel(path);

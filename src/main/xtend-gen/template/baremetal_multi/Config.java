@@ -11,6 +11,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import template.templateInterface.InitTemplate;
+import utils.Query;
 
 @FileTypeAnno(type = FileType.C_INCLUDE)
 @SuppressWarnings("all")
@@ -29,6 +30,7 @@ public class Config implements InitTemplate {
       _builder.newLine();
       _builder.append("#define CONFIG_H_");
       _builder.newLine();
+      _builder.append("#include <cheap_s.h>");
       _builder.newLine();
       _builder.append("/*");
       _builder.newLine();
@@ -43,11 +45,32 @@ public class Config implements InitTemplate {
       _builder.newLine();
       {
         for(final Vertex c : channels) {
-          _builder.append("#define ");
-          String _upperCase = c.getIdentifier().toUpperCase();
-          _builder.append(_upperCase);
-          _builder.append("_BLOCKING 0");
-          _builder.newLineIfNotEmpty();
+          {
+            boolean _isOnOneCoreChannel = Query.isOnOneCoreChannel(model, c);
+            if (_isOnOneCoreChannel) {
+              _builder.append("#define ");
+              String _upperCase = c.getIdentifier().toUpperCase();
+              _builder.append(_upperCase);
+              _builder.append("_BLOCKING 0");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _builder.newLine();
+      {
+        for(final Vertex c_1 : channels) {
+          {
+            boolean _isOnOneCoreChannel_1 = Query.isOnOneCoreChannel(model, c_1);
+            boolean _not = (!_isOnOneCoreChannel_1);
+            if (_not) {
+              _builder.append("#define ");
+              String _upperCase_1 = c_1.getIdentifier().toUpperCase();
+              _builder.append(_upperCase_1);
+              _builder.append("_ADDR 0x80020000");
+              _builder.newLineIfNotEmpty();
+            }
+          }
         }
       }
       _builder.append("#endif\t\t");

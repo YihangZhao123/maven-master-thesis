@@ -17,6 +17,6 @@ class test3 {
 		model.mergeInPlace(loader.loadModel(path2))
 		
 		
-		(new ForSyDeModelHandler).writeModel(model,"b.forsyde.xmi")
+		(new ForSyDeModelHandler).writeModel(model,"example1.fiodl")
 	}
 }

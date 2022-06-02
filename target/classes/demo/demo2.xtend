@@ -21,12 +21,17 @@ class demo2 {
 //		model.mergeInPlace(loader.loadModel(path2))
 		
 		
+//		
+//		val path = "b.forsyde.xmi"
+//		val root = "generateCode/c/multi"
+//		var loader = (new ForSyDeModelHandler)
+//		var model = loader.loadModel(path)		
 		
-		val path = "b.forsyde.xmi"
-		val root = "generateCode/c/multi"
+	
+		val path = "test2.fiodl"
+		val root = "generateCode/c/multi3"
 		var loader = (new ForSyDeModelHandler)
 		var model = loader.loadModel(path)		
-		
 		
 		
 		var Generator gen = new Generator(model, root)

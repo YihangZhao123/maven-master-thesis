@@ -10,12 +10,6 @@ Declare Extern Channal Variables
 ========================================
 */
 /* Input FIFO */
-
-extern ref_fifo fifo_s6;
-extern spinlock spinlock_s6;	
-
-extern ref_fifo fifo_s_in;
-extern spinlock spinlock_s_in;	
 /* Output FIFO */
 extern ref_fifo fifo_s1;
 extern spinlock spinlock_s1;
@@ -31,6 +25,7 @@ extern spinlock spinlock_s1;
 ========================================
 */	
 /*  initialize memory*/
+static	uint32 a; 
 void actor_p1(){
 
 	/* Read From Input Port  */
@@ -38,7 +33,11 @@ void actor_p1(){
 
 	
 	/* Inline Code           */
+	/* in combFunction p1impl */
+	a=5;
 	
 	/* Write To Output Ports */
+	write_non_blocking(&fifo_s1,(void*)&a);
+							
 
 }

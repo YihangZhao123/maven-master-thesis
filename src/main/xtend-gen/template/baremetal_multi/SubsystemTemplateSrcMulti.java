@@ -46,6 +46,7 @@ public class SubsystemTemplateSrcMulti implements SubsystemTemplate {
       _builder.newLineIfNotEmpty();
       _builder.append("#include \"../inc/datatype_definition.h\"");
       _builder.newLine();
+      _builder.append("#include <cheap_s.h>");
       _builder.newLine();
       _builder.append("void subsystem_");
       String _identifier_1 = tile.getIdentifier();
@@ -85,6 +86,9 @@ public class SubsystemTemplateSrcMulti implements SubsystemTemplate {
       _builder.append(_identifier_2);
       _builder.append("(){");
       _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("xil_printf(\"tile initialization starts\\n\");");
+      _builder.newLine();
       {
         for(final IntegerValue value : integerValues) {
           _builder.append("\t");
@@ -240,6 +244,8 @@ public class SubsystemTemplateSrcMulti implements SubsystemTemplate {
               _builder.append("_size);");
               _builder.newLineIfNotEmpty();
             } else {
+              _builder.append("\t");
+              _builder.newLine();
               _builder.append("\t");
               _builder.append("if (cheap_init_r (fifo_admin_");
               _builder.append(channelname, "\t");
@@ -408,6 +414,9 @@ public class SubsystemTemplateSrcMulti implements SubsystemTemplate {
           _builder.newLineIfNotEmpty();
         }
       }
+      _builder.append("\t");
+      _builder.append("xil_printf(\"tile initialization ends\\n\");\t\t\t\t");
+      _builder.newLine();
       _builder.append("\t");
       _builder.append("return 0;\t");
       _builder.newLine();

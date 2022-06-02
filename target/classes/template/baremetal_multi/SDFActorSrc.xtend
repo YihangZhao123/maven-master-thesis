@@ -215,11 +215,11 @@ class SDFActorSrc implements ActorTemplate {
 									#endif
 								«ELSE»
 									{
-										volatile «datatype» *tmp_ptrs;
+										volatile «datatype» *tmp_ptrs[1];
 										while ((cheap_claim_tokens (fifo_admin_«sdfchannelName», (volatile void **) tmp_ptrs, 1)) < 1)
 									 		cheap_release_all_claimed_tokens (fifo_admin_«sdfchannelName»);
 									 		 		
-										«port»=fifo_ptrs[0];
+										«port»=*tmp_ptrs[0];
 										cheap_release_spaces (fifo_admin_«sdfchannelName», 1);
 									}
 								«ENDIF»
@@ -245,7 +245,7 @@ class SDFActorSrc implements ActorTemplate {
 									 cheap_release_all_claimed_tokens (fifo_admin_«sdfchannelName»);								
 								
 								for(int i=0;i<«consumption»;++i){
-									«port»[i]=tmp_ptrs[i];	
+									«port»[i]=*tmp_ptrs[i];	
 								}
 								
 								cheap_release_spaces (fifo_admin_«sdfchannelName», 1);

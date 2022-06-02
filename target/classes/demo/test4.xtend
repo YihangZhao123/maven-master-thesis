@@ -1,6 +1,7 @@
 package demo
 import forsyde.io.java.core.ForSyDeSystemGraph
 
+
 import forsyde.io.java.core.Vertex
 import forsyde.io.java.core.VertexProperty
 import forsyde.io.java.core.VertexTrait
@@ -9,6 +10,8 @@ import forsyde.io.java.core.EdgeInfo
 import forsyde.io.java.core.EdgeTrait
 import java.util.Set
 import java.util.Map
+import java.util.List
+import java.util.ArrayList
 
 class test4 {
 	def static void main(String[] args) {
@@ -19,26 +22,26 @@ class test4 {
 		addchannel(model)
 		
 		
-		connectChannel(model,"s_in","p1","consumer","s_in",t)
-		connectChannel(model,"s1","p2","consumer","s1",t)
-		connectChannel(model,"s2","p4","consumer","s4",t)
-		connectChannel(model,"s3","p3","consumer","s3",t)
-		connectChannel(model,"s4","p5","consumer","s4",t)
-		connectChannel(model,"s5","p3","consumer","s5",t)
-		connectChannel(model,"s6","p1","consumer","s6",t)
+//		connectChannel(model,"s_in","p1","consumer","s_in",t)
+//		connectChannel(model,"s1","p2","consumer","s1",t)
+//		connectChannel(model,"s2","p4","consumer","s4",t)
+//		connectChannel(model,"s3","p3","consumer","s3",t)
+//		connectChannel(model,"s4","p5","consumer","s4",t)
+//		connectChannel(model,"s5","p3","consumer","s5",t)
+//		connectChannel(model,"s6","p1","consumer","s6",t)
+//		
+//		
+//		connectChannel(model,"p1","s1","s1","producer",t)
+//		connectChannel(model,"p2","s2","s2","producer",t)
+//		connectChannel(model,"p2","s3","s3","producer",t)
+//		connectChannel(model,"p4","s4","s4","producer",t)
+//		connectChannel(model,"p5","s5","s5","producer",t)
+//		connectChannel(model,"p3","s6","s6","producer",t)
+//		connectChannel(model,"p4","s_out","s_out","producer",t)
 		
 		
-		connectChannel(model,"p1","s1","s1","producer",t)
-		connectChannel(model,"p2","s2","s2","producer",t)
-		connectChannel(model,"p2","s3","s3","producer",t)
-		connectChannel(model,"p4","s4","s4","producer",t)
-		connectChannel(model,"p5","s5","s5","producer",t)
-		connectChannel(model,"p3","s6","s6","producer",t)
-		connectChannel(model,"p4","s_out","s_out","producer",t)
-		
-		
-		(new ForSyDeModelHandler).writeModel(model, "a.fiodl")
-		(new ForSyDeModelHandler).writeModel(model, "a.forsyde.xmi")
+		(new ForSyDeModelHandler).writeModel(model, "example2.fiodl")
+		(new ForSyDeModelHandler).writeModel(model, "example2.forsyde.xmi")
 
 	}
 	static def connectChannel(ForSyDeSystemGraph model
@@ -55,6 +58,7 @@ class test4 {
 	
 	static def addchannel(ForSyDeSystemGraph model){
 		var list= #["s_in","s_out","s1","s2","s3","s4","s5","s6"]
+//		var list= #["s1","s2","s3","s4","s5","s6"]
 		for(String name :list){
 			var ports = #{"producer", "consumer"}
 			
@@ -90,6 +94,7 @@ class test4 {
 			}
 	
 			var a = new Vertex(name, ports, properties)
+			
 			a.addTraits(VertexTrait.MOC_SDF_SDFCHANNEL, VertexTrait.DECISION_SDF_BOUNDEDSDFCHANNEL)
 			a.addTraits(VertexTrait.IMPL_TOKENIZABLEDATABLOCK)
 	
@@ -194,9 +199,11 @@ class test4 {
 		
 		model.connect(model.queryVertex("p1").get(),impl,"combFunctions")
 		
-		model.connect(model.queryVertex("p1").get(),impl,"s_in","s_in")
-		model.connect(model.queryVertex("p1").get(),impl,"s6","s6")
-		model.connect(impl,model.queryVertex("p1").get(),"s1","s1")
+		var List<EdgeTrait> l = new ArrayList
+		
+		model.connect(model.queryVertex("p1").get(),impl,"s_in","s_in",l)
+		model.connect(model.queryVertex("p1").get(),impl,"s6","s6",l)
+		model.connect(impl,model.queryVertex("p1").get(),"s1","s1",l)
 		
 		
 		

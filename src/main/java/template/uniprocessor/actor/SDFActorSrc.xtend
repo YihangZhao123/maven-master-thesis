@@ -176,7 +176,7 @@ class SDFActorSrc implements ActorTemplate {
 			//var inputPorts = Query.findImplInputPorts(impl)	
 			if (inputPorts !== null) {
 				for (String port : inputPorts) {
-					println("port-->"+ port)
+					//println("port-->"+ port)
 					if (!variableNameRecord.contains(port) && Query.isSystemChannel(model, impl, port) === null) {
 
 						var actorPortName = Query.findActorPortConnectedToImplInputPort(model, actor, impl, port)

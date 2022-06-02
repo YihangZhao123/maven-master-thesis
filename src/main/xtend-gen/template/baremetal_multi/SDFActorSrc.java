@@ -460,7 +460,7 @@ public class SDFActorSrc implements ActorTemplate {
                       _builder_1.append("\t");
                       _builder_1.append("volatile ");
                       _builder_1.append(datatype, "\t");
-                      _builder_1.append(" *tmp_ptrs;");
+                      _builder_1.append(" *tmp_ptrs[1];");
                       _builder_1.newLineIfNotEmpty();
                       _builder_1.append("\t");
                       _builder_1.append("while ((cheap_claim_tokens (fifo_admin_");
@@ -476,7 +476,7 @@ public class SDFActorSrc implements ActorTemplate {
                       _builder_1.newLine();
                       _builder_1.append("\t");
                       _builder_1.append(port, "\t");
-                      _builder_1.append("=fifo_ptrs[0];");
+                      _builder_1.append("=*tmp_ptrs[0];");
                       _builder_1.newLineIfNotEmpty();
                       _builder_1.append("\t");
                       _builder_1.append("cheap_release_spaces (fifo_admin_");
@@ -578,7 +578,7 @@ public class SDFActorSrc implements ActorTemplate {
                       _builder_2.newLineIfNotEmpty();
                       _builder_2.append("\t\t");
                       _builder_2.append(port, "\t\t");
-                      _builder_2.append("[i]=tmp_ptrs[i];\t");
+                      _builder_2.append("[i]=*tmp_ptrs[i];\t");
                       _builder_2.newLineIfNotEmpty();
                       _builder_2.append("\t");
                       _builder_2.append("}");

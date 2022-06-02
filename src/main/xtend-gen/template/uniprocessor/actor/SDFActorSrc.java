@@ -321,77 +321,74 @@ public class SDFActorSrc implements ActorTemplate {
         List<String> inputPorts = TypedOperation.safeCast(impl).get().getInputPorts();
         if ((inputPorts != null)) {
           for (final String port : inputPorts) {
-            {
-              InputOutput.<String>println(("port-->" + port));
-              if (((!variableNameRecord.contains(port)) && (Query.isSystemChannel(model, impl, port) == null))) {
-                String actorPortName = Query.findActorPortConnectedToImplInputPort(model, actor, impl, port);
-                String sdfchannelName = Query.findInputSDFChannelConnectedToActorPort(model, actor, actorPortName);
-                String datatype = Query.findSDFChannelDataType(model, model.queryVertex(sdfchannelName).get());
-                Integer consumption = SDFActor.safeCast(actor).get().getConsumption().get(actorPortName);
-                if ((consumption == null)) {
-                  String _ret = ret;
-                  StringConcatenation _builder = new StringConcatenation();
-                  _builder.append("Consumption in ");
-                  String _identifier = actor.getIdentifier();
-                  _builder.append(_identifier);
-                  _builder.append(" Not Specified!");
-                  _builder.newLineIfNotEmpty();
-                  ret = (_ret + _builder);
+            if (((!variableNameRecord.contains(port)) && (Query.isSystemChannel(model, impl, port) == null))) {
+              String actorPortName = Query.findActorPortConnectedToImplInputPort(model, actor, impl, port);
+              String sdfchannelName = Query.findInputSDFChannelConnectedToActorPort(model, actor, actorPortName);
+              String datatype = Query.findSDFChannelDataType(model, model.queryVertex(sdfchannelName).get());
+              Integer consumption = SDFActor.safeCast(actor).get().getConsumption().get(actorPortName);
+              if ((consumption == null)) {
+                String _ret = ret;
+                StringConcatenation _builder = new StringConcatenation();
+                _builder.append("Consumption in ");
+                String _identifier = actor.getIdentifier();
+                _builder.append(_identifier);
+                _builder.append(" Not Specified!");
+                _builder.newLineIfNotEmpty();
+                ret = (_ret + _builder);
+              } else {
+                if (((consumption).intValue() == 1)) {
+                  String _ret_1 = ret;
+                  StringConcatenation _builder_1 = new StringConcatenation();
+                  _builder_1.append("{");
+                  _builder_1.newLine();
+                  _builder_1.append("\t");
+                  _builder_1.append("void* tmp_addr;");
+                  _builder_1.newLine();
+                  _builder_1.append("\t");
+                  _builder_1.append("read_non_blocking(&fifo_");
+                  _builder_1.append(sdfchannelName, "\t");
+                  _builder_1.append(",&tmp_addr);");
+                  _builder_1.newLineIfNotEmpty();
+                  _builder_1.append("\t");
+                  _builder_1.append(port, "\t");
+                  _builder_1.append("= *((");
+                  _builder_1.append(datatype, "\t");
+                  _builder_1.append(" *)tmp_addr);");
+                  _builder_1.newLineIfNotEmpty();
+                  _builder_1.append("}");
+                  _builder_1.newLine();
+                  _builder_1.newLine();
+                  ret = (_ret_1 + _builder_1);
                 } else {
-                  if (((consumption).intValue() == 1)) {
-                    String _ret_1 = ret;
-                    StringConcatenation _builder_1 = new StringConcatenation();
-                    _builder_1.append("{");
-                    _builder_1.newLine();
-                    _builder_1.append("\t");
-                    _builder_1.append("void* tmp_addr;");
-                    _builder_1.newLine();
-                    _builder_1.append("\t");
-                    _builder_1.append("read_non_blocking(&fifo_");
-                    _builder_1.append(sdfchannelName, "\t");
-                    _builder_1.append(",&tmp_addr);");
-                    _builder_1.newLineIfNotEmpty();
-                    _builder_1.append("\t");
-                    _builder_1.append(port, "\t");
-                    _builder_1.append("= *((");
-                    _builder_1.append(datatype, "\t");
-                    _builder_1.append(" *)tmp_addr);");
-                    _builder_1.newLineIfNotEmpty();
-                    _builder_1.append("}");
-                    _builder_1.newLine();
-                    _builder_1.newLine();
-                    ret = (_ret_1 + _builder_1);
-                  } else {
-                    String _ret_2 = ret;
-                    StringConcatenation _builder_2 = new StringConcatenation();
-                    _builder_2.append("for(int i=0;i<");
-                    _builder_2.append(consumption);
-                    _builder_2.append(";++i){");
-                    _builder_2.newLineIfNotEmpty();
-                    _builder_2.append("\t");
-                    _builder_2.newLine();
-                    _builder_2.append("\t");
-                    _builder_2.append("void* tmp_addr;");
-                    _builder_2.newLine();
-                    _builder_2.append("\t");
-                    _builder_2.append("read_non_blocking(&fifo_");
-                    _builder_2.append(sdfchannelName, "\t");
-                    _builder_2.append(",&tmp_addr);");
-                    _builder_2.newLineIfNotEmpty();
-                    _builder_2.append("\t");
-                    _builder_2.append(port, "\t");
-                    _builder_2.append("[i]= *((");
-                    _builder_2.append(datatype, "\t");
-                    _builder_2.append(" *)tmp_addr);");
-                    _builder_2.newLineIfNotEmpty();
-                    _builder_2.append("}");
-                    _builder_2.newLine();
-                    _builder_2.newLine();
-                    ret = (_ret_2 + _builder_2);
-                  }
+                  String _ret_2 = ret;
+                  StringConcatenation _builder_2 = new StringConcatenation();
+                  _builder_2.append("for(int i=0;i<");
+                  _builder_2.append(consumption);
+                  _builder_2.append(";++i){");
+                  _builder_2.newLineIfNotEmpty();
+                  _builder_2.append("\t");
+                  _builder_2.newLine();
+                  _builder_2.append("\t");
+                  _builder_2.append("void* tmp_addr;");
+                  _builder_2.newLine();
+                  _builder_2.append("\t");
+                  _builder_2.append("read_non_blocking(&fifo_");
+                  _builder_2.append(sdfchannelName, "\t");
+                  _builder_2.append(",&tmp_addr);");
+                  _builder_2.newLineIfNotEmpty();
+                  _builder_2.append("\t");
+                  _builder_2.append(port, "\t");
+                  _builder_2.append("[i]= *((");
+                  _builder_2.append(datatype, "\t");
+                  _builder_2.append(" *)tmp_addr);");
+                  _builder_2.newLineIfNotEmpty();
+                  _builder_2.append("}");
+                  _builder_2.newLine();
+                  _builder_2.newLine();
+                  ret = (_ret_2 + _builder_2);
                 }
-                variableNameRecord.add(port);
               }
+              variableNameRecord.add(port);
             }
           }
         }

@@ -14,7 +14,7 @@ public class test3 {
       ForSyDeModelHandler loader = new ForSyDeModelHandler();
       ForSyDeSystemGraph model = loader.loadModel(path);
       model.mergeInPlace(loader.loadModel(path2));
-      new ForSyDeModelHandler().writeModel(model, "b.forsyde.xmi");
+      new ForSyDeModelHandler().writeModel(model, "example1.fiodl");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
