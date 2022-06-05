@@ -1,18 +1,14 @@
 package demo
 
+import forsyde.io.java.core.EdgeTrait
 import forsyde.io.java.core.ForSyDeSystemGraph
-
-
 import forsyde.io.java.core.Vertex
 import forsyde.io.java.core.VertexProperty
 import forsyde.io.java.core.VertexTrait
 import forsyde.io.java.drivers.ForSyDeModelHandler
-import forsyde.io.java.core.EdgeInfo
-import forsyde.io.java.core.EdgeTrait
-import java.util.Set
-import java.util.Map
-import java.util.List
 import java.util.ArrayList
+import java.util.List
+
 /**
  * load fiodl file
  */
@@ -66,7 +62,7 @@ class test {
 	
 	static def addchannel(ForSyDeSystemGraph model){
 		var list= #["s1"
-//			,"s_in"
+			,"s_in"
 		]
 //		var list= #["s1","s2","s3","s4","s5","s6"]
 		for(String name :list){
