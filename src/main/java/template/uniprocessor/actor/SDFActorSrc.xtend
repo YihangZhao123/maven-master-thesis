@@ -43,10 +43,10 @@ class SDFActorSrc implements ActorTemplate {
 		'''
 			«var name = actor.getIdentifier()»
 			/* Includes */
-			#include "../tile/config.h"
-			#include "../datatype/datatype_definition.h"
-			#include "../circular_fifo_lib/circular_fifo_lib.h"
-			#include "../sdfactor/sdfactor_«name».h"
+
+			#include "../../datatype/datatype_definition.h"
+			#include "../../circular_fifo_lib/circular_fifo_lib.h"
+			#include "sdfactor_«name».h"
 			
 			/*
 			========================================

@@ -64,13 +64,12 @@ public class SDFActorSrc implements ActorTemplate {
       _builder.newLineIfNotEmpty();
       _builder.append("/* Includes */");
       _builder.newLine();
-      _builder.append("#include \"../tile/config.h\"");
       _builder.newLine();
-      _builder.append("#include \"../datatype/datatype_definition.h\"");
+      _builder.append("#include \"../../datatype/datatype_definition.h\"");
       _builder.newLine();
-      _builder.append("#include \"../circular_fifo_lib/circular_fifo_lib.h\"");
+      _builder.append("#include \"../../circular_fifo_lib/circular_fifo_lib.h\"");
       _builder.newLine();
-      _builder.append("#include \"../sdfactor/sdfactor_");
+      _builder.append("#include \"sdfactor_");
       _builder.append(name);
       _builder.append(".h\"");
       _builder.newLineIfNotEmpty();

@@ -1,5 +1,5 @@
-#include "../inc/subsystem_tile3.h"
-#include "../inc/datatype_definition.h"
+#include "subsystem_tile3.h"
+#include "../datatype/datatype_definition.h"
 #include <cheap_s.h>
 void subsystem_tile3(){
 	actor_Abs();

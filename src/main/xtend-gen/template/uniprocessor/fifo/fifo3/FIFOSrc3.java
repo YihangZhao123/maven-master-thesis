@@ -30,7 +30,6 @@ public class FIFOSrc3 implements InitTemplate {
     _builder.newLine();
     _builder.append("*/");
     _builder.newLine();
-    _builder.append("#include \"../tile/config.h\"");
     _builder.newLine();
     _builder.append("#include \"../datatype/datatype_definition.h\"");
     _builder.newLine();

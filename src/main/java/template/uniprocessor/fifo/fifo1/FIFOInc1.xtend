@@ -36,7 +36,7 @@ class FIFOInc1 implements InitTemplate {
 		'''
 			#ifndef CIRCULAR_FIFO_LIB_H_
 			#define CIRCULAR_FIFO_LIB_H_
-			#include "../tile/config.h"
+
 			
 			/*
 			************************************************************

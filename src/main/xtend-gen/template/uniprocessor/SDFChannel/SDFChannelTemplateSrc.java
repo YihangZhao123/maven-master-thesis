@@ -37,11 +37,14 @@ public class SDFChannelTemplateSrc implements ChannelTemplate {
       String type = Query.findSDFChannelDataType(Generator.model, sdfchannel);
       Map<String, VertexProperty> properties = sdfchannel.getProperties();
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("#include \"../tile/config.h\"");
       _builder.newLine();
       String sdfname = sdfchannel.getIdentifier();
       _builder.newLineIfNotEmpty();
-      _builder.append("#include \"../circular_fifo_lib/circular_fifo_lib.h\"");
+      _builder.append("#include \"sdfchannel_");
+      _builder.append(sdfname);
+      _builder.append(".h\"");
+      _builder.newLineIfNotEmpty();
+      _builder.append("#include \"../../circular_fifo_lib/circular_fifo_lib.h\"");
       _builder.newLine();
       {
         Boolean _conforms = BoundedSDFChannel.conforms(sdfchannel);

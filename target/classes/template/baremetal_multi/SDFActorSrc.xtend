@@ -39,11 +39,11 @@ class SDFActorSrc implements ActorTemplate {
 		'''
 				«var name = actor.getIdentifier()»
 				/* Includes-------------------------- */
-				#include "../inc/config.h"
-				#include "../inc/datatype_definition.h"
-				#include "../inc/circular_fifo_lib.h"
+				
+				#include "../../datatype/datatype_definition.h"
+				#include "../../circular_fifo_lib/circular_fifo_lib.h"
 				#include <cheap_s.h>
-				#include "../inc/sdfcomb_«name».h"
+				#include "sdfactor_«name».h"
 				
 				/*
 				========================================
@@ -107,8 +107,8 @@ class SDFActorSrc implements ActorTemplate {
 						extern volatile «type» * const fifo_data_«sdfchannel.getIdentifier()»;	
 										
 					«ELSE»
-						circular_fifo_«type» fifo_«sdfchannel.getIdentifier()»;
-						spinlock spinlock_«sdfchannel.getIdentifier()»={.flag=0};
+						extern circular_fifo_«type» fifo_«sdfchannel.getIdentifier()»;
+						extern spinlock spinlock_«sdfchannel.getIdentifier()»;
 						
 					«ENDIF»
 					«var tmp=record.add(sdfchannel)»
@@ -123,8 +123,8 @@ class SDFActorSrc implements ActorTemplate {
 						extern volatile «type» * const fifo_data_«sdfchannel.getIdentifier()»;	
 										
 					«ELSE»
-						circular_fifo_«type» fifo_«sdfchannel.getIdentifier()»;
-						spinlock spinlock_«sdfchannel.getIdentifier()»={.flag=0};
+						extern circular_fifo_«type» fifo_«sdfchannel.getIdentifier()»;
+						extern spinlock spinlock_«sdfchannel.getIdentifier()»;
 						
 					«ENDIF»
 					«var tmp=record.add(sdfchannel)»

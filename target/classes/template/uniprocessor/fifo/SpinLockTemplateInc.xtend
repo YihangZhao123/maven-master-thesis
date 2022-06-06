@@ -12,8 +12,6 @@ class SpinLockTemplateInc implements InitTemplate{
 		'''
 			#ifndef SPINLOCK_H_
 			#define SPINLOCK_H_
-			#include "../tile/config.h"
-			
 			
 				#define ARM
 				typedef struct{

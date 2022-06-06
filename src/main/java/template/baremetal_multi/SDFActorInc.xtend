@@ -8,6 +8,7 @@ import forsyde.io.java.typed.viewers.moc.sdf.SDFActorViewer
 import generator.Generator
 import java.util.Set
 import template.templateInterface.ActorTemplate
+import utils.Query
 
 @FileTypeAnno(type=FileType.C_INCLUDE)
 class SDFActorInc implements ActorTemplate{

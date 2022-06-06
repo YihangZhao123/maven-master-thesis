@@ -20,7 +20,7 @@ class FIFOSrc3  implements InitTemplate {
 						copy by value
 			*******************************************************
 			*/
-			#include "../tile/config.h"
+
 			#include "../datatype/datatype_definition.h"
 			#include "../circular_fifo_lib/circular_fifo_lib.h"
 			

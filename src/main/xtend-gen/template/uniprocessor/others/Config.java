@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import template.templateInterface.InitTemplate;
 
+@Deprecated
 @FileTypeAnno(type = FileType.C_INCLUDE)
 @SuppressWarnings("all")
 public class Config implements InitTemplate {

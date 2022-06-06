@@ -15,7 +15,7 @@ class FIFOInc3 implements InitTemplate{
 		'''
 			#ifndef CIRCULAR_FIFO_LIB_H_
 			#define CIRCULAR_FIFO_LIB_H_
-			#include "../tile/config.h"			
+		
 			#include "../datatype/datatype_definition.h"
 			#include "../circular_fifo_lib/spinlock.h"	
 			#include <string.h>

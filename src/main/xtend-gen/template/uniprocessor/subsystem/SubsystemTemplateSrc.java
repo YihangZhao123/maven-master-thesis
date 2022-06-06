@@ -50,7 +50,7 @@ public class SubsystemTemplateSrc implements SubsystemTemplate {
       _builder.newLine();
       {
         for(final Vertex v : sdfcomb) {
-          _builder.append("#include \"../sdfactor/sdfactor_");
+          _builder.append("#include \"./sdfactor/sdfactor_");
           String _identifier = v.getIdentifier();
           _builder.append(_identifier);
           _builder.append(".h\"");

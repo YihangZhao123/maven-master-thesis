@@ -12,7 +12,7 @@ class SpinLockTemplateInc implements InitTemplate{
 		'''
 			#ifndef SPINLOCK_H_
 			#define SPINLOCK_H_
-			#include "config.h"
+
 			
 
 				#define ARM

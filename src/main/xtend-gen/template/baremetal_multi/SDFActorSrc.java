@@ -65,19 +65,18 @@ public class SDFActorSrc implements ActorTemplate {
       _builder.append("/* Includes-------------------------- */");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("#include \"../inc/config.h\"");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("#include \"../inc/datatype_definition.h\"");
+      _builder.append("#include \"../../datatype/datatype_definition.h\"");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("#include \"../inc/circular_fifo_lib.h\"");
+      _builder.append("#include \"../../circular_fifo_lib/circular_fifo_lib.h\"");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("#include <cheap_s.h>");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("#include \"../inc/sdfcomb_");
+      _builder.append("#include \"sdfactor_");
       _builder.append(name, "\t");
       _builder.append(".h\"");
       _builder.newLineIfNotEmpty();
@@ -238,17 +237,17 @@ public class SDFActorSrc implements ActorTemplate {
                   _builder.append("\t\t\t\t");
                   _builder.newLine();
                 } else {
-                  _builder.append("circular_fifo_");
+                  _builder.append("extern circular_fifo_");
                   _builder.append(type);
                   _builder.append(" fifo_");
                   String _identifier_2 = sdfchannel.getIdentifier();
                   _builder.append(_identifier_2);
                   _builder.append(";");
                   _builder.newLineIfNotEmpty();
-                  _builder.append("spinlock spinlock_");
+                  _builder.append("extern spinlock spinlock_");
                   String _identifier_3 = sdfchannel.getIdentifier();
                   _builder.append(_identifier_3);
-                  _builder.append("={.flag=0};");
+                  _builder.append(";");
                   _builder.newLineIfNotEmpty();
                   _builder.newLine();
                 }
@@ -297,17 +296,17 @@ public class SDFActorSrc implements ActorTemplate {
                   _builder.append("\t\t\t\t");
                   _builder.newLine();
                 } else {
-                  _builder.append("circular_fifo_");
+                  _builder.append("extern circular_fifo_");
                   _builder.append(type_1);
                   _builder.append(" fifo_");
                   String _identifier_6 = sdfchannel_1.getIdentifier();
                   _builder.append(_identifier_6);
                   _builder.append(";");
                   _builder.newLineIfNotEmpty();
-                  _builder.append("spinlock spinlock_");
+                  _builder.append("extern spinlock spinlock_");
                   String _identifier_7 = sdfchannel_1.getIdentifier();
                   _builder.append(_identifier_7);
-                  _builder.append("={.flag=0};");
+                  _builder.append(";");
                   _builder.newLineIfNotEmpty();
                   _builder.newLine();
                 }

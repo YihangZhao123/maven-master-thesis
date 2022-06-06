@@ -31,7 +31,7 @@ class SubsystemTemplateSrc implements SubsystemTemplate {
 			#include "subsystem.h"
 			#include <stdio.h>
 			«FOR v : sdfcomb»
-				#include "../sdfactor/sdfactor_«v.getIdentifier()».h"
+				#include "./sdfactor/sdfactor_«v.getIdentifier()».h"
 			«ENDFOR»
 			#include "../datatype/datatype_definition.h"
 			#include "../circular_fifo_lib/circular_fifo_lib.h"

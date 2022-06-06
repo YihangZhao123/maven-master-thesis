@@ -1,5 +1,5 @@
-#include "../inc/subsystem_tile2.h"
-#include "../inc/datatype_definition.h"
+#include "subsystem_tile2.h"
+#include "../datatype/datatype_definition.h"
 #include <cheap_s.h>
 void subsystem_tile2(){
 	actor_Gx();

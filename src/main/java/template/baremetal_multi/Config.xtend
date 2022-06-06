@@ -8,11 +8,11 @@ import fileAnnotation.FileType
 import forsyde.io.java.typed.viewers.moc.sdf.SDFChannel
 import java.util.stream.Collectors
 import utils.Query
-
+@Deprecated
 @FileTypeAnno(type=FileType.C_INCLUDE)
 class Config implements InitTemplate {
 	override savePath() {
-		 return "/circular_fifo_lib/config.h"
+		 return "/sdfchannel/config.h"
 	}
 	override create() {
 		var model=Generator.model
@@ -34,11 +34,11 @@ class Config implements InitTemplate {
 			«ENDIF»
 			«ENDFOR»
 			
-			«FOR c:channels »
-			«IF !Query.isOnOneCoreChannel(model,c)»
-				#define «c.getIdentifier().toUpperCase()»_ADDR 0x80020000
-			«ENDIF»
-			«ENDFOR»
+«««			«FOR c:channels »
+«««			«IF !Query.isOnOneCoreChannel(model,c)»
+«««				#define «c.getIdentifier().toUpperCase()»_ADDR 0x80020000
+«««			«ENDIF»
+«««			«ENDFOR»
 			#endif		
 		'''
 	}

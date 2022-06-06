@@ -32,7 +32,7 @@ class FIFOSrc1 implements InitTemplate {
 	}
 	override create() {
 		'''
-			#include "../tile/config.h"
+
 			
 			/*
 			*******************************************************
@@ -46,8 +46,8 @@ class FIFOSrc1 implements InitTemplate {
 				write_blocking_typeName(...)
 			*******************************************************
 			*/
-			#include "../inc/datatype_definition.h"
-			#include "../inc/circular_fifo_lib.h"
+			#include "../datatype/datatype_definition.h"
+			#include "circular_fifo_lib.h"
 			#include <string.h>
 			
 	

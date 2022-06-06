@@ -38,13 +38,13 @@ public class SpinLockTemplateSrc implements InitTemplate {
     _builder.append("\t");
     _builder.append("void spinlock_get(spinlock* lock){");
     _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("while(ATOMIC_TEST_AND_SET(&lock->flag,1)==1){");
+    _builder.append("\t");
+    _builder.append("//\twhile(ATOMIC_TEST_AND_SET(&lock->flag,1)==1){");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
+    _builder.append("\t");
+    _builder.append("//\t}");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -52,8 +52,8 @@ public class SpinLockTemplateSrc implements InitTemplate {
     _builder.append("\t");
     _builder.append("void spinlock_release(spinlock* lock){");
     _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("ATOMIC_TEST_AND_SET(&lock->flag,0);");
+    _builder.append("\t");
+    _builder.append("//\tATOMIC_TEST_AND_SET(&lock->flag,0);");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}\t");

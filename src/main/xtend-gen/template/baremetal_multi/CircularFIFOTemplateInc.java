@@ -52,8 +52,6 @@ public class CircularFIFOTemplateInc implements InitTemplate {
     _builder.append("\t");
     _builder.append("#define CIRCULAR_FIFO_LIB_H_");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("#include \"config.h\"");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
@@ -79,7 +77,7 @@ public class CircularFIFOTemplateInc implements InitTemplate {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("#include \"datatype_definition.h\"");
+    _builder.append("#include \"../datatype/datatype_definition.h\"");
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();

@@ -15,7 +15,6 @@ public class SpinLockTemplateInc implements InitTemplate {
     _builder.newLine();
     _builder.append("#define SPINLOCK_H_");
     _builder.newLine();
-    _builder.append("#include \"config.h\"");
     _builder.newLine();
     _builder.newLine();
     _builder.newLine();

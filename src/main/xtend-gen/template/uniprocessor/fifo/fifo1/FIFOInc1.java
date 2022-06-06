@@ -50,7 +50,6 @@ public class FIFOInc1 implements InitTemplate {
     _builder.newLine();
     _builder.append("#define CIRCULAR_FIFO_LIB_H_");
     _builder.newLine();
-    _builder.append("#include \"../tile/config.h\"");
     _builder.newLine();
     _builder.newLine();
     _builder.append("/*");

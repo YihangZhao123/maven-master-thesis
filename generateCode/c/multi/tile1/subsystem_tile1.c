@@ -1,5 +1,5 @@
-#include "../inc/subsystem_tile1.h"
-#include "../inc/datatype_definition.h"
+#include "subsystem_tile1.h"
+#include "../datatype/datatype_definition.h"
 #include <cheap_s.h>
 void subsystem_tile1(){
 	actor_GrayScale();

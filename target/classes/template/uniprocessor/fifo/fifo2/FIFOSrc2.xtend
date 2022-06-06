@@ -29,7 +29,7 @@ class FIFOSrc2  implements InitTemplate {
 						copy by reference
 			*******************************************************
 			*/
-			#include "../tile/config.h"
+
 			#include "../datatype/datatype_definition.h"
 			#include "../circular_fifo_lib/circular_fifo_lib.h"
 			

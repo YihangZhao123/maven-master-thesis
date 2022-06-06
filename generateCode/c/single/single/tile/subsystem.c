@@ -1,10 +1,10 @@
 #include "subsystem.h"
 #include <stdio.h>
-#include "../sdfactor/sdfactor_Gx.h"
-#include "../sdfactor/sdfactor_Abs.h"
-#include "../sdfactor/sdfactor_Gy.h"
-#include "../sdfactor/sdfactor_GrayScale.h"
-#include "../sdfactor/sdfactor_getPx.h"
+#include "./sdfactor/sdfactor_Gx.h"
+#include "./sdfactor/sdfactor_Abs.h"
+#include "./sdfactor/sdfactor_Gy.h"
+#include "./sdfactor/sdfactor_GrayScale.h"
+#include "./sdfactor/sdfactor_getPx.h"
 #include "../datatype/datatype_definition.h"
 #include "../circular_fifo_lib/circular_fifo_lib.h"
 /*

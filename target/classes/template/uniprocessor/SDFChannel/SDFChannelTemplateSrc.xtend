@@ -25,9 +25,10 @@ class SDFChannelTemplateSrc implements ChannelTemplate {
 		var type = Query.findSDFChannelDataType(Generator.model, sdfchannel)
 		var properties = sdfchannel.getProperties()
 		'''	
-			#include "../tile/config.h"
+			
 			«var sdfname=sdfchannel.getIdentifier()»
-			#include "../circular_fifo_lib/circular_fifo_lib.h"
+			#include "sdfchannel_«sdfname».h"
+			#include "../../circular_fifo_lib/circular_fifo_lib.h"
 				«IF BoundedSDFChannel.conforms(sdfchannel)»
 					«var viewer = new BoundedSDFChannelViewer(sdfchannel)»
 					«var maximumTokens =viewer.getMaximumTokens()»
