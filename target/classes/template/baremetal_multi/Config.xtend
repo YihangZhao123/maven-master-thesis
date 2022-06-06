@@ -11,7 +11,9 @@ import utils.Query
 
 @FileTypeAnno(type=FileType.C_INCLUDE)
 class Config implements InitTemplate {
-
+	override savePath() {
+		 return "/circular_fifo_lib/config.h"
+	}
 	override create() {
 		var model=Generator.model
 		var channels=model.vertexSet().stream()
@@ -41,8 +43,6 @@ class Config implements InitTemplate {
 		'''
 	}
 
-	override getFileName() {
-		return "config"
-	}
+
 
 }

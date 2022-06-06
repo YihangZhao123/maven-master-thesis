@@ -10,7 +10,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import template.templateInterface.ActorTemplate;
-import utils.Name;
 import utils.Save;
 
 @SuppressWarnings("all")
@@ -39,18 +38,18 @@ public class SDFCombProcessingModule implements ModuleInterface {
       FileType _type = anno.type();
       boolean _equals = Objects.equal(_type, FileType.C_INCLUDE);
       if (_equals) {
-        String _name = Name.name(v);
-        String _plus = ((Generator.root + "/inc/sdfcomb_") + _name);
-        String _plus_1 = (_plus + ".h");
-        Save.save(_plus_1, t.create(v));
+        String _create = t.create(v);
+        String _savePath = t.savePath();
+        String _plus = (Generator.root + _savePath);
+        Save.save(_create, _plus);
       }
       FileType _type_1 = anno.type();
       boolean _equals_1 = Objects.equal(_type_1, FileType.C_SOURCE);
       if (_equals_1) {
-        String _name_1 = Name.name(v);
-        String _plus_2 = ((Generator.root + "/src/sdfcomb_") + _name_1);
-        String _plus_3 = (_plus_2 + ".c");
-        Save.save(_plus_3, t.create(v));
+        String _create_1 = t.create(v);
+        String _savePath_1 = t.savePath();
+        String _plus_1 = (Generator.root + _savePath_1);
+        Save.save(_create_1, _plus_1);
       }
     };
     this.templates.stream().forEach(_function);

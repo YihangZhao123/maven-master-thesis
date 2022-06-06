@@ -39,6 +39,11 @@ public class CircularFIFOTemplateInc implements InitTemplate {
   }
   
   @Override
+  public String savePath() {
+    return "/circular_fifo_lib/circular_fifo_lib.h";
+  }
+  
+  @Override
   public String create() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\t");
@@ -113,11 +118,6 @@ public class CircularFIFOTemplateInc implements InitTemplate {
     _builder.append("#endif");
     _builder.newLine();
     return _builder.toString();
-  }
-  
-  @Override
-  public String getFileName() {
-    return "circular_fifo_lib";
   }
   
   public String foo(final Vertex v) {

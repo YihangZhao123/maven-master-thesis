@@ -6,8 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Save {
-	 public static boolean save(String path,String content)  {
-		 
+	 public static boolean save(String content,String path)  {
+		 System.out.println(path);
 		 File f = new File(path);
 		 File f_parentfile=f.getParentFile();
 		 if(!f_parentfile.exists()) {

@@ -23,12 +23,13 @@ class SDFActorSrc implements ActorTemplate {
 	Set<Vertex> implActorSet
 	Set<Vertex> inputSDFChannelSet
 	Set<Vertex> outputSDFChannelSet
-
+	Vertex actor
+	override savePath() {
+		return "/sdfactor/sdfactor_"+actor.getIdentifier()+".c"
+	}
 	override create(Vertex actor) {
 		val model = Generator.model
-
-//		implActorSet = VertexAcessor.getMultipleNamedPort(Generator.model, actor, "combFunctions",
-//			VertexTrait.IMPL_ANSICBLACKBOXEXECUTABLE, VertexPortDirection.OUTGOING)
+		this.actor=actor
 		implActorSet = SDFActor.safeCast(actor).get().getCombFunctionsPort(model).stream().map([v|v.getViewedVertex()]).
 			collect(Collectors.toSet())
 		this.inputSDFChannelSet = Query.findInputSDFChannels(model, actor)
@@ -204,15 +205,36 @@ class SDFActorSrc implements ActorTemplate {
 						} else if (consumption == 1) {
 							ret += '''
 								«IF Query.isOnOneCoreChannel(model,model.queryVertex(sdfchannelName).get())»
+«««									#if «sdfchannelName.toUpperCase()»_BLOCKING==0
+«««									ret=read_non_blocking_«datatype»(&fifo_«sdfchannelName»,&«port»);
+«««									if(ret==-1){
+«««										printf("fifo_«sdfchannelName» read error\n");
+«««									}
+«««									
+«««									#else
+«««									read_blocking_«datatype»(&fifo_«sdfchannelName»,&«port»,&spinlock_«sdfchannelName»);
+«««									#endif
+									«IF Generator.fifoType==1»
 									#if «sdfchannelName.toUpperCase()»_BLOCKING==0
 									ret=read_non_blocking_«datatype»(&fifo_«sdfchannelName»,&«port»);
 									if(ret==-1){
-										printf("fifo_«sdfchannelName» read error\n");
+										//printf("fifo_«sdfchannelName» read error\n");
 									}
 									
 									#else
 									read_blocking_«datatype»(&fifo_«sdfchannelName»,&«port»,&spinlock_«sdfchannelName»);
 									#endif
+									«ENDIF»
+									«IF Generator.fifoType==2»
+									{
+										void* tmp_addr;
+										read_non_blocking(&fifo_«sdfchannelName»,&tmp_addr);
+										«port»= *((«datatype» *)tmp_addr);
+									}
+									«ENDIF»
+									«IF Generator.fifoType==3»
+									
+									«ENDIF»
 								«ELSE»
 									{
 										volatile «datatype» *tmp_ptrs[1];
@@ -228,7 +250,16 @@ class SDFActorSrc implements ActorTemplate {
 							ret += '''
 							«IF Query.isOnOneCoreChannel(model,model.queryVertex(sdfchannelName).get())»
 								for(int i=0;i<«consumption»;++i){
-									
+«««									
+«««									#if «sdfchannelName.toUpperCase()»_BLOCKING==0
+«««									ret=read_non_blocking_«datatype»(&fifo_«sdfchannelName»,&«port»[i]);
+«««									if(ret==-1){
+«««										printf("fifo_«sdfchannelName» read error\n");
+«««									}
+«««									#else
+«««									read_blocking_«datatype»(&fifo_«sdfchannelName»,&«port»[i],&spinlock_«sdfchannelName»);
+«««									#endif
+									«IF Generator.fifoType==1»
 									#if «sdfchannelName.toUpperCase()»_BLOCKING==0
 									ret=read_non_blocking_«datatype»(&fifo_«sdfchannelName»,&«port»[i]);
 									if(ret==-1){
@@ -237,6 +268,15 @@ class SDFActorSrc implements ActorTemplate {
 									#else
 									read_blocking_«datatype»(&fifo_«sdfchannelName»,&«port»[i],&spinlock_«sdfchannelName»);
 									#endif
+									«ENDIF»
+									 «IF Generator.fifoType==2»
+									void* tmp_addr;
+									read_non_blocking(&fifo_«sdfchannelName»,&tmp_addr);
+									«port»[i]= *((«datatype» *)tmp_addr);
+									«ENDIF»
+									«IF Generator.fifoType==3»
+									
+									«ENDIF»
 								}
 							«ELSE»
 							{
@@ -293,11 +333,23 @@ class SDFActorSrc implements ActorTemplate {
 					} else if (production == 1) {
 						ret += '''
 						«IF Query.isOnOneCoreChannel(model,model.queryVertex(sdfchannelName).get())»
+«««							#if «sdfchannelName.toUpperCase()»_BLOCKING==0
+«««							write_non_blocking_«datatype»(&fifo_«sdfchannelName»,«outport»);
+«««							#else
+«««							write_blocking_«datatype»(&fifo_«sdfchannelName»,«outport»,&spinlock_«sdfchannelName»);
+«««							#endif
+							«IF Generator.fifoType==1»
 							#if «sdfchannelName.toUpperCase()»_BLOCKING==0
 							write_non_blocking_«datatype»(&fifo_«sdfchannelName»,«outport»);
 							#else
 							write_blocking_«datatype»(&fifo_«sdfchannelName»,«outport»,&spinlock_«sdfchannelName»);
 							#endif
+							«ENDIF»
+							«IF Generator.fifoType==2»
+							write_non_blocking(&fifo_«sdfchannelName»,(void*)&«outport»);
+							«ENDIF»	
+							«IF Generator.fifoType==3»
+							«ENDIF»			
 						«ELSE»
 						{
 							volatile «datatype» *tmp_ptrs[1];
@@ -314,11 +366,18 @@ class SDFActorSrc implements ActorTemplate {
 						ret += '''
 						«IF Query.isOnOneCoreChannel(model,model.queryVertex(sdfchannelName).get())»
 							for(int i=0;i<«production»;++i){
+								«IF Generator.fifoType==1»
 								#if «sdfchannelName.toUpperCase()»_BLOCKING==0
 								write_non_blocking_«datatype»(&fifo_«sdfchannelName»,«outport»[i]);
 								#else
 								write_blocking_«datatype»(&fifo_«sdfchannelName»,«outport»[i],&spinlock_«sdfchannelName»);
 								#endif
+								«ENDIF»
+								«IF Generator.fifoType==2»
+								write_non_blocking(&fifo_«sdfchannelName»,(void*)&«outport»[i]);		
+								«ENDIF»							
+								«IF Generator.fifoType==3»
+								«ENDIF»
 							}
 						«ELSE»	
 						{

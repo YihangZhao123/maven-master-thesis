@@ -1,2 +1,2 @@
-main: main.c ./single/src/*.c
-	gcc -o main main.c ./single/src/*.c
+main: main.c  ./single/circular_fifo_lib/*.c   ./single/datatype/*.c   ./single/sdfactor/*.c ./single/sdfchannel/*.c    ./single/tile/*.c  
+	gcc -o main  main.c ./single/circular_fifo_lib/*.c   ./single/datatype/*.c   ./single/sdfactor/*.c  ./single/sdfchannel/*.c    ./single/tile/*.c  

@@ -27,7 +27,9 @@ class CircularFIFOTemplateInc implements InitTemplate {
 		}	
 
 	}
-
+	override savePath() {
+		return "/circular_fifo_lib/circular_fifo_lib.h"
+	}
 	override create() {
 		'''
 			#ifndef CIRCULAR_FIFO_LIB_H_
@@ -57,9 +59,7 @@ class CircularFIFOTemplateInc implements InitTemplate {
 		'''
 	}
 
-	override getFileName() {
-		return "circular_fifo_lib"
-	}
+
 	def String foo(Vertex v){
 		'''
 		«val type=v.getIdentifier()»

@@ -27,10 +27,12 @@ class FIFOSrc1 implements InitTemplate {
 			typeVertexSet.remove(null)
 		}	
 	}
-
+	override savePath() {
+		return "/circular_fifo_lib/circular_fifo_lib.c"
+	}
 	override create() {
 		'''
-			#include "../inc/config.h"
+			#include "../tile/config.h"
 			
 			/*
 			*******************************************************
@@ -305,9 +307,7 @@ class FIFOSrc1 implements InitTemplate {
 		'''
 	}
 
-	override getFileName() {
-		return "circular_fifo_lib"
-	}
+
 	def isOneDimension(Vertex v){
 		var inner =Query.getInnerType(Generator.model,v)
 		var innerVertex = Query.findVertexByName(Generator.model,inner)

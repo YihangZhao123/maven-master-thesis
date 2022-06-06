@@ -15,9 +15,15 @@ import utils.Query
  */
 @FileTypeAnno(type=FileType.C_SOURCE)
 class SDFChannelTemplateSrc implements ChannelTemplate {
-
+	Vertex sdfchannel
+	override savePath() {
+		return "sdfchannel/sdfchannel_"+this.sdfchannel.getIdentifier()+".c"
+	}
 	override create(Vertex sdfchannel) {
 		var model=Generator.model
+		this.sdfchannel=sdfchannel
+		
+		
 		var type = Query.findSDFChannelDataType(Generator.model, sdfchannel)
 		var properties = sdfchannel.getProperties()
 		'''	

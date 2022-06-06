@@ -33,8 +33,9 @@ class Config implements InitTemplate {
 		'''
 	}
 
-	override getFileName() {
-		return "config"
+	override savePath() {			
+		return "/tile/config.h"
+	
 	}
 
 }

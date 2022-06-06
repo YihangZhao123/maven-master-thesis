@@ -50,7 +50,7 @@ public class DataTypeSrc implements InitTemplate {
   }
   
   @Override
-  public String getFileName() {
-    return "data_definition";
+  public String savePath() {
+    return "/datatype/datatype_definition.c";
   }
 }

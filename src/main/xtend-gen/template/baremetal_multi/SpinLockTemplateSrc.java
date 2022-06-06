@@ -64,7 +64,7 @@ public class SpinLockTemplateSrc implements InitTemplate {
   }
   
   @Override
-  public String getFileName() {
-    return "spinlock";
+  public String savePath() {
+    return "/circular_fifo_lib/spinlock.c";
   }
 }

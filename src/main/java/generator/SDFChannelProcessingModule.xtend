@@ -25,11 +25,11 @@ class SDFChannelProcessingModule implements ModuleInterface{
 			 var anno = t.getClass(). getAnnotation(FileTypeAnno)
 			 
 			 if(anno.type()==FileType.C_INCLUDE){
-			 	Save.save(Generator.root+"/inc/sdfchannel_"+Name.name(v)+".h",t.create(v));
+			 	Save.save(t.create(v),Generator.root+t.savePath());
 			 }
 			 
 			 if(anno.type()==FileType.C_SOURCE){
-			 	Save.save(Generator.root+"/src/sdfchannel_"+Name.name(v)+".c",t.create(v))
+			 	Save.save(t.create(v),Generator.root+t.savePath())
 			 }
 		] )
 	}

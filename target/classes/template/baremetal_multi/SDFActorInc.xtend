@@ -12,7 +12,9 @@ import template.templateInterface.ActorTemplate
 @FileTypeAnno(type=FileType.C_INCLUDE)
 class SDFActorInc implements ActorTemplate{
 	Set<Executable> a
+	Vertex actor
 	override create(Vertex actor) {
+		this.actor=actor
 		this.a=   (new SDFActorViewer(actor)).getCombFunctionsPort(Generator.model)
 		'''
 			«var name = actor.getIdentifier()»
@@ -23,6 +25,10 @@ class SDFActorInc implements ActorTemplate{
 			#endif
 		'''
 		
+	}
+	
+	override savePath() {
+		return "/sdfactor/sdfactor_"+actor.getIdentifier()+".h"
 	}
 	
 }

@@ -59,7 +59,7 @@ public class Config implements InitTemplate {
   }
   
   @Override
-  public String getFileName() {
-    return "config";
+  public String savePath() {
+    return "/tile/config.h";
   }
 }

@@ -17,6 +17,11 @@ import utils.Query;
 @SuppressWarnings("all")
 public class Config implements InitTemplate {
   @Override
+  public String savePath() {
+    return "/circular_fifo_lib/config.h";
+  }
+  
+  @Override
   public String create() {
     String _xblockexpression = null;
     {
@@ -78,10 +83,5 @@ public class Config implements InitTemplate {
       _xblockexpression = _builder.toString();
     }
     return _xblockexpression;
-  }
-  
-  @Override
-  public String getFileName() {
-    return "config";
   }
 }

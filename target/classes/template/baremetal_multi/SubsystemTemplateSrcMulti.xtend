@@ -133,8 +133,8 @@ class SubsystemTemplateSrcMulti implements SubsystemTemplate {
 		'''
 	}
 
-	override getFileName() {
-		return "subsystem_tile_" + s.tile.getIdentifier()
+	override savePath() {
+		return "/"+s.tile.getIdentifier()+"/subsystem_"+s.tile.getIdentifier()+".c"
 	}
 
 	def help(HashMap<String, Integer> ordering) {

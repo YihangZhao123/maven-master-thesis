@@ -28,8 +28,8 @@ class SpinLockTemplateInc implements InitTemplate{
 		'''
 	}
 	
-	override getFileName() {
-		return "spinlock"
+	override savePath() {
+		return "/circular_fifo_lib/spinlock.h"
 	}
 	
 }

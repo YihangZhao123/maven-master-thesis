@@ -27,8 +27,8 @@ class DataTypeSrc implements InitTemplate {
 		'''
 	}
 	
-	override getFileName() {
-		return "data_definition"
+	override savePath() {
+		return "/datatype/datatype_definition.c"
 	}
 	
 }

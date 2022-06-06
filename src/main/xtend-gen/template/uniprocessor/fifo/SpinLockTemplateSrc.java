@@ -11,7 +11,7 @@ public class SpinLockTemplateSrc implements InitTemplate {
   @Override
   public String create() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("#include \"../inc/spinlock.h\"");
+    _builder.append("#include \"spinlock.h\"");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("#if defined(WINDOWS)");
@@ -63,7 +63,7 @@ public class SpinLockTemplateSrc implements InitTemplate {
   }
   
   @Override
-  public String getFileName() {
-    return "spinlock";
+  public String savePath() {
+    return "/circular_fifo_lib/spinlock.c";
   }
 }
